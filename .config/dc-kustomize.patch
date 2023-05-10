@@ -1,0 +1,57 @@
+- op: add
+  path: /objects/0/spec/template/spec/containers/0/ports/-
+  value:
+    containerPort: ${{MGMT_PORT}}
+    protocol: ${PORT_PROTOCOL}
+
+- op: add
+  path: /objects/1/spec/ports/-
+  value:
+    port: ${{MGMT_PORT}}
+    name: ${MGMT_PORT}-port
+    targetPort: ${{MGMT_PORT}}
+    protocol: ${PORT_PROTOCOL}
+
+- op: add
+  path: /objects/0/spec/template/spec/containers/0/env
+  value:
+    - name: RABBITMQ_CONFIG_FILE
+      value: ${RABBITMQ_CONFIG_FILE}
+
+- op: add
+  path: /objects/0/spec/template/spec/containers/0/volumeMounts
+  value:
+    - mountPath: /opt/rabbitmq/defs
+      name: rabbit-defs-vol
+    - mountPath: /opt/rabbitmq/conf
+      name: rabbit-config-vol
+
+- op: add
+  path: /objects/0/spec/template/spec/volumes
+  value:
+    - name: rabbit-defs-vol
+      secret:
+        secretName: rabbit-config-definitions
+
+- op: add
+  path: /objects/0/spec/template/spec/volumes/-
+  value:
+    name: rabbit-config-vol
+    configMap:
+      name: rabbitmq-config
+
+- op: add
+  path: /parameters/-
+  value:
+    description: management gui port
+    displayName: MGMT_PORT
+    name: MGMT_PORT
+    required: true
+
+- op: add
+  path: /parameters/-
+  value:
+    description: rabbit configfile location
+    displayName: RABBITMQ_CONFIG_FILE
+    name: RABBITMQ_CONFIG_FILE
+    required: true

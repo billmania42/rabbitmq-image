@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  rabbitmq.config: |
+    [
+     {rabbit,
+      [ {collect_statistics, fine}, {collect_statistics_interval, 60000}]},
+     {prometheus, [ {rabbitmq_exporter, [{connections_total_enabled, false}]}
+       ]},
+     {kernel,[]},
+     {rabbitmq_management,[ {load_definitions, "/opt/rabbitmq/defs/definitions.json"}]},
+     {rabbitmq_shovel,
+      [{shovels, []}]},
+     {rabbitmq_stomp,[]},
+     {rabbitmq_mqtt, []},
+     {rabbitmq_amqp1_0,[]},
+     {rabbitmq_auth_backend_ldap,[]},
+     {lager, []}
+    ].
+kind: ConfigMap
+metadata:
+  name: rabbitmq-config

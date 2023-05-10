@@ -1,0 +1,42 @@
+{
+  "templates": [
+    { "templateName":  "dc-svc-prom-port-template",
+      "patchFile":  "dc-kustomize.patch",
+      "params": {
+        "SVC_PORT": "5672",
+        "MGMT_PORT": "15672",
+        "PROMETHEUS_PORT": "15692",
+        "PROMETHEUS_PATH": "/metrics",
+        "PROMETHEUS_SCRAPE": "false",
+        "PROMETHEUS_SCHEME": "http",
+        "RABBITMQ_CONFIG_FILE": "/opt/rabbitmq/conf/rabbitmq.config"
+      }
+    },
+    { "templateName":  "route-template",
+      "params":  {
+        "SVC_PORT": "15672",
+        "ROUTE_HOST": "rabbitmq-mgmt.com"
+      },
+      "dev": {
+        "params": {
+          "ROUTE_HOST": "rabbitmq-dev.com"
+        }
+      },
+      "qa": {
+        "params": {
+          "ROUTE_HOST": "rabbitmq-qa.com"
+        }
+      },
+      "uat": {
+        "params": {
+          "ROUTE_HOST": "rabbitmq-uat.com"
+        }
+      },
+      "stg": {
+        "params": {
+          "ROUTE_HOST": "rabbitmq-stg.com"
+        }
+      }
+    }
+  ]
+}
