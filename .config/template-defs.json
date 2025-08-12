@@ -1,6 +1,6 @@
 {
   "templates": [
-    { "templateName":  "dc-svc-prom-port-template",
+    { "templateName":  "dc-svc-template",
       "patchFile":  "dc-kustomize.patch",
       "params": {
         "SVC_PORT": "5672",
@@ -25,11 +25,6 @@
       "qa": {
         "params": {
           "ROUTE_HOST": "rabbitmq-qa.com"
-        }
-      },
-      "uat": {
-        "params": {
-          "ROUTE_HOST": "rabbitmq-uat.com"
         }
       },
       "stg": {

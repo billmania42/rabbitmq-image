@@ -1,4 +1,4 @@
-FROM docker-dev.artifactory.com/ubi7/ubi:latest
+FROM redhat/ubi8:latest
 
 ADD rabbit.repo /etc/yum.repos.d/rabbit.repo
 
